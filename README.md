@@ -1,1 +1,1 @@
-# Graph-Convolutional-Networks
+# Dependency-Graph-Convolutional-Networks
