@@ -24,9 +24,11 @@ class Dependency_GCN(nn.Module):
                   likes
                  /     \
            (nsubj)     (xcomp)
+            |             |
             dog         eating
             |             |
            (nmod:poss)  (obj)
+            |             |
             My          sausage
         """
         
