@@ -7,8 +7,8 @@
 > - output: The sum of token embedding itself and dependency relation that is connected to the governor. (list)
 - text_processing.py
 > Output format
-> - input_tk_list: Tokens of given text based on the selected nlp pipeline. (list)
-> - input_dep_list: Dependency triple of given text based on the selected nlp pipeline. (list)
+> - input_tk_list (list): Tokens of given text based on the selected nlp pipeline.
+> - input_dep_list (list): Dependency triple of given text based on the selected nlp pipeline.
 
 # Prerequisites
 > - argparse
