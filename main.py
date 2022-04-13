@@ -1,6 +1,7 @@
 from GraphLayers import Dependency_GCN
 import torch
 import stanza
+import argparse
 
 def tk2onehot(_tk_list):
     tk_dim = len(_tk_list)
@@ -69,7 +70,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--reverse", default=True, type=boolean, help="Applying reverse dependency cases or not.")
+    parser.add_argument("--reverse", default=True, type=bool, help="Applying reverse dependency cases or not.")
 
     args = parser.parse_args()
 
