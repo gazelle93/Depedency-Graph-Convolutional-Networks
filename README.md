@@ -1,5 +1,5 @@
 # Overview
-- Graph-Neural-Networks (GNN) represents a given graph where the nodes are linked with edges into a vector space. In typed dependency of given text forms tripes of words and dependency ($t_{dep}$, dependency, $t_{gov}$) similar to the triples of nodes and edge in a graph.
+- Graph-Neural-Networks (GNN) represents a given graph where the nodes are linked with edges into a vector space. In typed dependency of given text forms tripes of words and dependency (t<sub>dep, dependency, $t_{gov}$) similar to the triples of nodes and edge in a graph.
 h<sub>&theta
 
 - 
