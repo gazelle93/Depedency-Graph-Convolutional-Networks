@@ -1,7 +1,8 @@
-from GraphLayers import Dependency_GCN
 import torch
-import stanza
 import argparse
+
+from text_processing import preprocessing
+from GraphLayers import Dependency_GCN
 
 def tk2onehot(_tk_list):
     tk_dim = len(_tk_list)
@@ -13,33 +14,8 @@ def tk2onehot(_tk_list):
     return tk2onehot
 
 def main(args):
-    nlp = stanza.Pipeline('en')
     sample_text = "My dog likes eating sausage"
-    
-    text = nlp(sample_text)
-    
-    input_tk_list = ["ROOT"]
-    input_dep_list = []
-    for sen in text.sentences:
-        for tk in sen.tokens:
-            tk_infor_dict = tk.to_dict()[0]
-            cur_tk = tk_infor_dict["text"]
-
-            cur_id = tk_infor_dict['id']
-            cur_head = tk_infor_dict['head']
-            cur_dep = tk_infor_dict["deprel"]
-
-            cur_dep_triple = (cur_id, cur_dep, cur_head)
-            input_tk_list.append(cur_tk)
-            input_dep_list.append(cur_dep_triple)
-
-    """
-    print(input_tk_list)
-    -> ['ROOT', 'My', 'dog', 'likes', 'eating', 'sausage']
-
-    print(input_dep_list)
-    -> [(1, 'nmod:poss', 2), (2, 'nsubj', 3), (3, 'root', 0), (4, 'xcomp', 3), (5, 'obj', 4)]
-    """
+    input_tk_list, input_dep_list = preprocessing(sample_text, args.nlp_pipeline)
 
     input_rep = tk2onehot(input_tk_list)
     dependency_list = [x[1] for x in input_dep_list]
@@ -70,6 +46,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
+    parser.add_argument("--nlp_pipeline", default="stanza", type=str, help="NLP preprocessing pipeline.")
     parser.add_argument("--reverse", default=True, type=bool, help="Applying reverse dependency cases or not.")
 
     args = parser.parse_args()
