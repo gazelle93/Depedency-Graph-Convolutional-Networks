@@ -2,7 +2,7 @@
 - This project aims to develop dependency graph convolutional networks in order to represent the dependency relations of each word from given text. 
 
 # Brief description
-- Dep_GCN.py
+- DepGCN.py
 > Output format
 > - output: The sum of token embedding itself and dependency relation that is connected to the governor. (list)
 - text_processing.py
