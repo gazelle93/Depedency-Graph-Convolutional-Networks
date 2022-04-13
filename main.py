@@ -2,7 +2,7 @@ import torch
 import argparse
 
 from text_processing import preprocessing
-from GraphLayers import Dependency_GCN
+from DepGCN import Dependency_GCN
 
 def tk2onehot(_tk_list):
     tk_dim = len(_tk_list)
