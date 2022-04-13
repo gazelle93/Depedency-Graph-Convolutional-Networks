@@ -1,12 +1,5 @@
 # Overview
-- Graph-Neural-Networks (GNN) represents a given graph where the nodes are linked with edges into a vector space. In typed dependency of given text forms tripes of words and dependency (t<sub>dep</sub>, dependency, $t_{gov}$) similar to the triples of nodes and edge in a graph.
-h<sub>&theta
-
-- 
-- it aims to develop dependency graph convolutional networks in order to represent the dependency relations of each word from given text. 
-- In order to represent the graph where
-- In Graph Neural Networks(GNN), 
-- This project aims to develop dependency graph convolutional networks in order to represent the dependency relations of each word from given text. 
+- Graph-Neural-Networks (GNN) represents a given graph where the nodes are linked with edges into a vector space. The typed dependency of given text forms triples of words and dependency (t<sub>dep</sub>, dependency, t<sub>gov</sub>) is similar to the triples of nodes and edge in a graph (n<sub>i</sub>, edge, n<sub>j</sub>). Therefore, this project aims to develop dependency-graph-convolutional-networks in order to represent the dependency relations of each word from given text. The output of the dependency-graph-convolutional-networks is the token-level representation of the sum of the token and its dependency.
 
 # Brief description
 - DepGCN.py
