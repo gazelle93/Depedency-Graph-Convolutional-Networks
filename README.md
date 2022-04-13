@@ -11,14 +11,14 @@
 > - input_dep_list (list): Dependency triple of given text based on the selected nlp pipeline.
 
 # Prerequisites
-> - argparse
-> - torch
-> - stanza
-> - spacy
+- argparse
+- torch
+- stanza
+- spacy
 
 # Parameters
-> - nlp_pipeline(str, defaults to "stanza"): NLP preprocessing pipeline.
-> - reverse(bool, defaults to True): Applying reverse dependency cases (gov -> dep) or not.
+- nlp_pipeline(str, defaults to "stanza"): NLP preprocessing pipeline.
+- reverse(bool, defaults to True): Applying reverse dependency cases (gov -> dep) or not.
 
 # References
 - Graph Neural Networks: Scarselli, F., Gori, M., Tsoi, A. C., Hagenbuchner, M., & Monfardini, G. (2008). The graph neural network model. IEEE transactions on neural networks, 20(1), 61-80.
