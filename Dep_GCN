@@ -46,7 +46,7 @@ class Dependency_GCN(nn.Module):
         else:
             reversed_dep_list = []
             for dependency in dependency_list:
-                reversed_dep_list.append(dependency+'r')
+                reversed_dep_list.append(dependency+'_r')
             dependency_list = dependency_list + reversed_dep_list
 
             for label in dependency_list:
@@ -79,7 +79,7 @@ class Dependency_GCN(nn.Module):
                 cur_dependent = dep_triple[0]
                 
                 Dep_GCN_tensor_dict[cur_dependent].append(self.weights[cur_dependency](_input[cur_governor]))
-                Dep_GCN_tensor_dict[cur_governor].append(self.weights[cur_dependency+'r'](_input[cur_dependent]))
+                Dep_GCN_tensor_dict[cur_governor].append(self.weights[cur_dependency+'_r'](_input[cur_dependent]))
                 
                 
         # sum token representation of itself and (dependent, dependency, governor) representation
