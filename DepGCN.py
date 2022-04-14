@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class Dependency_GCN(nn.Module):
-    def __init__(self, dim, dependency_list, reverse_case=True):
+    def __init__(self, in_dim, out_dim, dependency_list, reverse_case=True):
         super(Dependency_GCN, self).__init__()
         # dim: dimension of dependency weight
         # dependency_list: the entire dependency types
@@ -32,14 +32,14 @@ class Dependency_GCN(nn.Module):
             My          sausage
         """
         
-        self.dependency_weight_list =[['self', nn.Linear(dim, dim)]]
+        self.dependency_weight_list =[['self', nn.Linear(in_dim, out_dim)],['root', nn.Linear(in_dim, out_dim)]]
         self.reverse_case = reverse_case
         
         # Considering the result of dependency representation
         # (gov -> dep)
         if reverse_case == False:
             for label in dependency_list:
-                self.dependency_weight_list.append([label, nn.Linear(dim, dim)])
+                self.dependency_weight_list.append([label, nn.Linear(in_dim, out_dim)])
             self.weights = nn.ModuleDict(self.dependency_weight_list)
             
             
@@ -52,7 +52,7 @@ class Dependency_GCN(nn.Module):
             dependency_list = dependency_list + reversed_dep_list
 
             for label in dependency_list:
-                self.dependency_weight_list.append([label, nn.Linear(dim, dim)])
+                self.dependency_weight_list.append([label, nn.Linear(in_dim, out_dim)])
             self.weights = nn.ModuleDict(self.dependency_weight_list)
 
     def forward(self, _input, dependency_triples):
