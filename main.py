@@ -17,9 +17,12 @@ def main(args):
     sample_text = "My dog likes eating sausage"
     input_tk_list, input_dep_list = preprocessing(sample_text, args.nlp_pipeline)
 
+    # Simple One-hot encoding is applied. This can be replaced based on the choice of embedding language model.
     input_rep = tk2onehot(input_tk_list)
+    
     dependency_list = [x[1] for x in input_dep_list]
 
+    # input_dim: word embedding dimension
     model = Dependency_GCN(in_dim=len(input_tk_list), out_dim=len(input_tk_list), dependency_list=dependency_list, reverse_case=args.reverse)
     """
     print(model)
