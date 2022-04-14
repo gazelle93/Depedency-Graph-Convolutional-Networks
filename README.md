@@ -21,5 +21,5 @@
 - reverse(bool, defaults to True): Applying reverse dependency cases (gov -> dep) or not.
 
 # References
-- Relational-Graph-Convolutional-Networks (R-GCN): Schlichtkrull, M., Kipf, T. N., Bloem, P., Berg, R. V. D., Titov, I., & Welling, M. (2018, June). Modeling relational data with graph convolutional networks. In European semantic web conference (pp. 593-607). Springer, Cham.
 - Graph Convolutional Networks (GCN): Kipf, T. N., & Welling, M. (2016). Semi-supervised classification with graph convolutional networks. arXiv preprint arXiv:1609.02907.
+- Relational-Graph-Convolutional-Networks (R-GCN): Schlichtkrull, M., Kipf, T. N., Bloem, P., Berg, R. V. D., Titov, I., & Welling, M. (2018, June). Modeling relational data with graph convolutional networks. In European semantic web conference (pp. 593-607). Springer, Cham.
