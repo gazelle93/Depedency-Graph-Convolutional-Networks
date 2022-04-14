@@ -20,7 +20,7 @@ def main(args):
     input_rep = tk2onehot(input_tk_list)
     dependency_list = [x[1] for x in input_dep_list]
 
-    model = Dependency_GCN(dim=len(input_tk_list), dependency_list=dependency_list, reverse_case=args.reverse)
+    model = Dependency_GCN(in_dim=len(input_tk_list), out_dim=len(input_tk_list), dependency_list=dependency_list, reverse_case=args.reverse)
     """
     print(model)
     -> Dependency_GCN(
