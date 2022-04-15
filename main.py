@@ -22,26 +22,11 @@ def main(args):
     
     dependency_list = list(set([x[1] for x in input_dep_list]))
 
-    # input_dim: word embedding dimension
-    model = Dependency_GCN(in_dim=len(input_tk_list), out_dim=len(input_tk_list), dependency_list=dependency_list, reverse_case=args.reverse)
-    """
-    print(model)
-    -> Dependency_GCN(
-      (weights): ModuleDict(
-        (self): Linear(in_features=6, out_features=6, bias=True)
-        (nmod:poss): Linear(in_features=6, out_features=6, bias=True)
-        (nsubj): Linear(in_features=6, out_features=6, bias=True)
-        (root): Linear(in_features=6, out_features=6, bias=True)
-        (xcomp): Linear(in_features=6, out_features=6, bias=True)
-        (obj): Linear(in_features=6, out_features=6, bias=True)
-        (nmod:poss_r): Linear(in_features=6, out_features=6, bias=True)
-        (nsubj_r): Linear(in_features=6, out_features=6, bias=True)
-        (root_r): Linear(in_features=6, out_features=6, bias=True)
-        (xcomp_r): Linear(in_features=6, out_features=6, bias=True)
-        (obj_r): Linear(in_features=6, out_features=6, bias=True)
-      )
-    )
-    """
+    in_dim = len(input_tk_list)
+    out_dim = len(input_tk_list)
+    model = Dependency_GCN(in_dim=in_dim, out_dim=out_dim, dependency_list=dependency_list, 
+                           num_layers = args.num_layers, reverse_case=args.reverse)
+
     output = model(input_rep, input_dep_list)
 
     print(output)
@@ -50,6 +35,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--nlp_pipeline", default="stanza", type=str, help="NLP preprocessing pipeline.")
+    parser.add_argument("--num_layers", default=1, type=int, help="The number of hidden layers of GCN.")
     parser.add_argument("--reverse", default=True, type=bool, help="Applying reverse dependency cases or not.")
 
     args = parser.parse_args()
