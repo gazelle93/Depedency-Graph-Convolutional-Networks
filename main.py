@@ -23,7 +23,7 @@ def main(args):
     dependency_list = list(set([x[1] for x in input_dep_list]))
 
     in_dim = len(input_tk_list)
-    out_dim = len(input_tk_list)
+    out_dim = len(input_rep[0])
     model = Dependency_GCN(in_dim=in_dim, out_dim=out_dim, dependency_list=dependency_list, 
                            num_layers = args.num_layers, reverse_case=args.reverse)
 
