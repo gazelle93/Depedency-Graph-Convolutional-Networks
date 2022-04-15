@@ -7,21 +7,42 @@ class Dependency_GCN(nn.Module):
         super(Dependency_GCN, self).__init__()
         # dim: dimension of dependency weight
         # dependency_list: the entire dependency types
-        # num_layers: number of hidden layers
         # reverse_case (default=True): Considering not only the result of dependency representation but also the reversed dependency representation
         
+        """
+        - Text:
+            My dog likes eating sausage.
+            
+        - Universal dependencies: 
+            nmod:poss(dog-2, My-1)
+            nsubj(likes-3, dog-2)
+            root(ROOT-0, likes-3)
+            xcomp(likes-3, eating-4)
+            obj(eating-4, sausage-5)
+            
+        * Dependency can be presented as a directed graph
+                  likes
+                 /     \
+           (nsubj)     (xcomp)
+            |             |
+            dog         eating
+            |             |
+           (nmod:poss)  (obj)
+            |             |
+            My          sausage
+        """
         self.in_dim = in_dim
         self.out_dim = out_dim
         self.num_layers = num_layers
         
-        self.dependency_weight_list =[['self', nn.Linear(in_dim, out_dim)],['root', nn.Linear(in_dim, out_dim)]]
+        self.dependency_weight_list =[['self', nn.Linear(out_dim, out_dim)],['root', nn.Linear(out_dim, out_dim)]]
         self.reverse_case = reverse_case
         
         # Considering the result of dependency representation
         # (gov -> dep)
         if reverse_case == False:
             for label in dependency_list:
-                self.dependency_weight_list.append([label, nn.Linear(in_dim, out_dim)])
+                self.dependency_weight_list.append([label, nn.Linear(out_dim, out_dim)])
             self.weights = nn.ModuleDict(self.dependency_weight_list)
             
             
@@ -34,7 +55,7 @@ class Dependency_GCN(nn.Module):
             dependency_list = dependency_list + reversed_dep_list
 
             for label in dependency_list:
-                self.dependency_weight_list.append([label, nn.Linear(in_dim, out_dim)])
+                self.dependency_weight_list.append([label, nn.Linear(out_dim, out_dim)])
             self.weights = nn.ModuleDict(self.dependency_weight_list)
             
     def message_passing(self, _input, dependency_triples):
@@ -51,15 +72,15 @@ class Dependency_GCN(nn.Module):
                 cur_dependency = dep_triple[1]
                 cur_dependent = dep_triple[0]
                 
-                temp_tensor[cur_dependent] += self.weights[cur_dependency](_input[cur_governor])
+                temp_tensor[cur_dependent] += self.weights[cur_dependency](_input[cur_governor].T)
         else:
             for dep_triple in dependency_triples:
                 cur_governor = dep_triple[2]
                 cur_dependency = dep_triple[1]
                 cur_dependent = dep_triple[0]
                 
-                temp_tensor[cur_dependent] += self.weights[cur_dependency](_input[cur_governor])
-                temp_tensor[cur_governor] += self.weights[cur_dependency+'_r'](_input[cur_dependent])
+                temp_tensor[cur_dependent] += self.weights[cur_dependency](_input[cur_governor].T)
+                temp_tensor[cur_governor] += self.weights[cur_dependency+'_r'](_input[cur_dependent].T)
                 
         return temp_tensor
 
