@@ -18,6 +18,7 @@
 
 # Parameters
 - nlp_pipeline(str, defaults to "stanza"): NLP preprocessing pipeline.
+- num_layers(int, defaults to 1): The number of hidden layers of the architecture.
 - reverse(bool, defaults to True): Applying reverse dependency cases (gov -> dep) or not.
 
 # References
