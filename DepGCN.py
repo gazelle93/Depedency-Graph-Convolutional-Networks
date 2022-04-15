@@ -68,9 +68,6 @@ class Dependency_GCNLayer(nn.Module):
 class Dependency_GCN(nn.Module):
     def __init__(self, in_dim, out_dim, dependency_list, num_layers=1 ,reverse_case=True):
         super(Dependency_GCN, self).__init__()
-        # dim: dimension of dependency weight
-        # dependency_list: the entire dependency types
-        # reverse_case (default=True): Considering not only the result of dependency representation but also the reversed dependency representation
         self.num_layers = num_layers
         self.gcn_layer = []
         for i in range(num_layers):
