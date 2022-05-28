@@ -79,7 +79,8 @@ class Dependency_GCN(nn.Module):
     def forward(self, _input, dependency_triples):
         h_ = self.gcn_layer[0](_input, dependency_triples, False)
         if self.num_layers > 1:
-            for i in range(self.num_layers-1):
+            for i in range(self.num_layers-2):
                 h_ = self.gcn_layer[i+1](h_, dependency_triples)
+            h_ = self.gat_layer[self.num_layers-1](output, dependency_triples, False)
                 
         return h_
