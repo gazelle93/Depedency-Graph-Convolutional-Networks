@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class Dependency_GCNLayer(nn.Module):
-    def __init__(self, in_dim, out_dim, dependency_list, reverse_case=True):
+    def __init__(self, in_dim, out_dim, dependency_list, reverse_case=True, dropout_rate=0.1):
         super(Dependency_GCNLayer, self).__init__()
         # dim: dimension of dependency weight
         # dependency_list: the entire dependency types
@@ -12,6 +12,7 @@ class Dependency_GCNLayer(nn.Module):
         self.in_dim = in_dim
         self.out_dim = out_dim
         self.relu = nn.ReLU()
+        self.dropout = nn.Dropout(p=dropout_rate)
         
         self.dependency_weight_list =[['self', nn.Linear(out_dim, out_dim)],['root', nn.Linear(out_dim, out_dim)]]
         self.reverse_case = reverse_case
@@ -62,7 +63,9 @@ class Dependency_GCNLayer(nn.Module):
                 
         return temp_tensor
     
-    def forward(self, _input, dependency_triples):
+    def forward(self, _input, dependency_triples, is_dropout=True):
+        if is_dropout:
+            return self.dropout(self.relu(self.message_passing(_input, dependency_triples)))
         return self.relu(self.message_passing(_input, dependency_triples))
     
 class Dependency_GCN(nn.Module):
