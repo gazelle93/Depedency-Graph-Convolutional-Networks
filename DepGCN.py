@@ -81,6 +81,6 @@ class Dependency_GCN(nn.Module):
         if self.num_layers > 1:
             for i in range(self.num_layers-2):
                 h_ = self.gcn_layer[i+1](h_, dependency_triples)
-            h_ = self.gat_layer[self.num_layers-1](output, dependency_triples, False)
+            h_ = self.gcn_layer[self.num_layers-1](output, dependency_triples, False)
                 
         return h_
