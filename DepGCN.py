@@ -77,7 +77,7 @@ class Dependency_GCN(nn.Module):
             self.gcn_layer.append(Dependency_GCNLayer(in_dim, out_dim, dependency_list,reverse_case))
 
     def forward(self, _input, dependency_triples):
-        h_ = self.gcn_layer[0](_input, dependency_triples)
+        h_ = self.gcn_layer[0](_input, dependency_triples, False)
         if self.num_layers > 1:
             for i in range(self.num_layers-1):
                 h_ = self.gcn_layer[i+1](h_, dependency_triples)
